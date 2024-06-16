@@ -89,8 +89,13 @@ public class Main {
                             break;
                         }
                     }
-                    // pos가 null이면 선택 취소
+                    // pos가 null이면 선택 취소거나 timedOut
                     else{
+                        if(input.isTimedOut()){
+                            input.setSelected(false);
+                            board.toggleTurn();
+                            break;
+                        }
                         input.setSelected(false);
                         break;
                     }
@@ -104,6 +109,9 @@ public class Main {
                 pos = input.getCoord();
                 if(pos != null){
                     input.setSelected(true);
+                }
+                else{
+                    board.toggleTurn();
                 }
             }
         }
