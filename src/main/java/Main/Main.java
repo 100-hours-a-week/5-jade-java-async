@@ -30,9 +30,11 @@ public class Main {
     public static void main(String[] args) {
         Board board = new Board();
         Input input = new Input();
-        Piece current = null;
+        Piece current;
         String color;
         Pair pos = null;
+        // Conditional break inside loop
+        // 해당 경고 무시
         while(true){
             // 게임 종료
             if(input.getFlag()){
@@ -48,6 +50,8 @@ public class Main {
             // 말이 선택되었을때
             if(input.getSelected()){
                 while(true){
+                    // Method invocation 'getX' may produce 'NullPointerException'
+                    // 해당 예외 발생하지 않음
                     current = board.getPiece(pos.getX(), pos.getY());
                     // 해당위치에 말이 없으면(혹시모를 오류처리)
                     if(current == null){

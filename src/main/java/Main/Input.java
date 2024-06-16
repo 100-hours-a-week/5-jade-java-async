@@ -7,8 +7,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-// 입력 스레드는 스레드로 두지말고 함수로 둔 다음
-// 타이머 스레드만 스레드로 두고 공유 메모리 사용해서 timedOut 관리하는 방식으로 변경하는게 나을듯
+// Timer와 Executor, Callable, Future로 타이머에 연동된 비동기 입력 구현
+// 해당 문제를 해결하느라 코드가 많이 복잡합니다..
 public class Input {
     private boolean selected;
     private boolean flag;
@@ -37,6 +37,7 @@ public class Input {
             try{
                 while(!br.ready()){
                     // 버퍼 입력될때까지(엔터키) 대기
+                    // 빈 while문 경고가 발생하는데, 무시
                 }
                 this.input = br.readLine();
             } catch(IOException e){
@@ -127,6 +128,8 @@ public class Input {
                     System.out.println("정확한 좌표를 입력해주세요. (e.g., e2, a4");
                     move="";
                 }
+                // Condition move.isEmpty() is always 'true'
+                // 해당 경고는 무시해도됨
             }while(move.isEmpty());
         } finally {
             ex.shutdown();
